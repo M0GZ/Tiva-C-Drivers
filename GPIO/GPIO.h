@@ -22,15 +22,6 @@ typedef enum {
 	PORTE = 0x40024000,
 	PORTF = 0x40025000
 }PORT;
-typedef enum {
-	PortA =0,
-	PortB,
-	PortC,
-	PortD,
-	PortE,
-	PortF
-}Port;
-
 
 typedef enum {
 	P0,P1,P2,P3,P4,P5,P6,P7
