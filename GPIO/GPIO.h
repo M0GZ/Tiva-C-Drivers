@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "tm4c123gh6pm.h"
-//#include "F:\Tiva-C-Drivers\GPIO\common_macros"
+#include "common_macros.h"
 
 /*-----------------------TYPEDEFs---------------------*/
 typedef enum {
@@ -22,6 +22,15 @@ typedef enum {
 	PORTE = 0x40024000,
 	PORTF = 0x40025000
 }PORT;
+typedef enum {
+	PortA =0,
+	PortB,
+	PortC,
+	PortD,
+	PortE,
+	PortF
+}Port;
+
 
 typedef enum {
 	P0,P1,P2,P3,P4,P5,P6,P7
@@ -38,7 +47,7 @@ typedef enum {
 #define	PORTD_BASE 										0x40007000
 #define	PORTE_BASE  									0x40024000
 #define	PORTF_BASE  									0x40025000
-#define GPIO_DATA_OFFSET            	0x000               
+#define GPIO_DATA_OFFSET            	0x3FC               
 #define GPIO_LOCK_OFFEST							0x520
 #define GPIO_CR_OFFSET								0x524
 #define GPIO_AFSEL_OFFEST							0x420
@@ -50,10 +59,9 @@ typedef enum {
 #define GPIO_PDR_OFFSET								0x514
 #define GPIO_IM_OFFSET               	0x410
 #define GPIO_IS_OFFSET              	0x404
+#define GPIO_RIS_OFFSET               0x414
 
-
-#define ADDRESS(BASE,OFFSET)  ( *( (volatile uint32_t*) ( ( (uint32_t)BASE ) + ( (uint32_t) OFFSET ) ) ))
-
+#define ADDRESS(BASE,OFFSET)				(*((volatile uint32_t*)(((uint32_t)BASE)+((uint32_t)OFFSET))))
 /*-----------------FUNCTIONS PROTOTYPES----------------*/
 
 void digitalPinMode(MODE Mode, PORT Port, PIN Pin, RESISTYPE ResisType);
@@ -61,5 +69,4 @@ void digitalPinWrite(PORT Port, PIN Pin, bool Value);
 bool digitalPinRead(PORT Port, PIN Pin);
 uint8_t digitalPortRead(PORT Port);
 void digitalPortWrite(PORT Port, uint8_t Value);
-
 #endif
