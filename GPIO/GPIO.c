@@ -69,16 +69,3 @@ void digitalPortWrite(PORT Port, uint8_t Value)
 {
 	ADDRESS(Port,GPIO_DATA_OFFSET) = ( ADDRESS(Port,GPIO_DATA_OFFSET) & (0xFFFFFF00) ) | ( (uint32_t) Value ) ;
 }
-int main ()
-{
-	digitalPinMode(INPUT, PORTF, P4, PDR);
-	digitalPinMode(OUTPUT, PORTF, P3, PDR);
-	while(1)
-	{
-		if(digitalPinRead(PORTF, P4) == 1)
-			digitalPinWrite(PORTF,P3,1);
-		else
-			digitalPinWrite(PORTF,P3,0);
-	}
-	return 0 ;
-}
