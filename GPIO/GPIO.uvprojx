@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>F:\Programs\Keil_v5\ARM\ARMCC\lib</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

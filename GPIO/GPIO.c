@@ -1,6 +1,7 @@
 #include "GPIO.h"
 void digitalPinMode(MODE Mode, PORT Port, PIN Pin, RESISTYPE ResisType)
 {
+		//Calculate the port num from the port address
 		uint8_t portNum = (Port % PORTA_BASE) / (0x1000);
 		if(Port == PORTE)
 			portNum = 4;

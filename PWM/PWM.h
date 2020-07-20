@@ -1,19 +1,35 @@
-#ifndef GPIO_H_
-#define GPIO_H_
+#ifndef _PWM_h
+#define _PWM_h
 
 /*---------------------INCLUDES----------------------*/
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "tm4c123gh6pm.h"
+//#include "tm4c123gh6pm.h"
 #include "common_macros.h"
-
 /*-----------------------TYPEDEFs---------------------*/
+typedef uint16_t FREQ;
 typedef enum {
-	INPUT,
-	OUTPUT
-}MODE;
+	PWM0,
+	PWM1
+}PWM_MODULE;
 
+typedef enum {
+	GEN0,
+	GEN1,
+	GEN2,
+	GEN3
+}PWM_GEN;
+
+typedef enum {
+	DIV_1,
+	DIV_2  = 0x0,
+	DIV_4  = 0x1,
+	DIV_8  = 0x2,
+	DIV_16 = 0x3,
+	DIV_32 = 0x4,
+	DIV_64 = 0x7
+}PWM_DIV;
 typedef enum {
 	PORTA = 0x40004000,
 	PORTB = 0x40005000,
@@ -26,12 +42,26 @@ typedef enum {
 typedef enum {
 	P0,P1,P2,P3,P4,P5,P6,P7
 }PIN;
-typedef enum {
-	PUR,
-	PDR
-}RESISTYPE;
+/*-----------------------STRUCTs-----------------------*/
+struct{
+
+
+}PWM0_GEN0_PB6;
+struct{
+
+
+}PWM0_GEN2_PE5;
+struct{
+
+
+}PWM1_GEN0_PD0;
+struct{
+
+
+}PWM1_GEN2_PF1;
 
 /*------------------------DEFINES----------------------*/
+#define ADDRESS(BASE,OFFSET)				(*((volatile uint32_t*)(((uint32_t)BASE)+((uint32_t)OFFSET))))
 #define	PORTA_BASE 									  0x40004000
 #define	PORTB_BASE 										0x40005000
 #define	PORTC_BASE 										0x40006000
@@ -51,15 +81,9 @@ typedef enum {
 #define GPIO_IM_OFFSET               	0x410
 #define GPIO_IS_OFFSET              	0x404
 #define GPIO_RIS_OFFSET               0x414
-
-#define ADDRESS(BASE,OFFSET)				(*((volatile uint32_t*)(((uint32_t)BASE)+((uint32_t)OFFSET))))
+	
 /*-----------------FUNCTIONS PROTOTYPES----------------*/
-
-void digitalPinMode(MODE Mode, PORT Port, PIN Pin, RESISTYPE ResisType);
-void digitalPinWrite(PORT Port, PIN Pin, bool Value);
-bool digitalPinRead(PORT Port, PIN Pin);
-uint8_t digitalPortRead(PORT Port);
-void digitalPortWrite(PORT Port, uint8_t Value);
+void PWM_Init(PWM_MODULE PWMmodule ,PWM_DIV div ,FREQ freq,PORT port,PIN pin);
 
 
 #endif
